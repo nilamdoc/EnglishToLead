@@ -147,9 +147,57 @@ function showDivQuestion(){
 	var questionType = smartSelect.getValue()
 	console.log(questionType);
 }
-///////////////////////////////////////////////////////////////////
 
+function  selectAttachment(value){
+	
+	$$("#AudioAttach").hide();
+	$$("#VideoAttach").hide();
+	$$("#ImageAttach").hide();
+	$$("#PDFAttach").hide();
+	switch(value) {
+  case "Audio":
+    // code block
+				$$("#AudioAttach").show();
+    break;
+  case "Video":
+    // code block
+				$$("#VideoAttach").show();
+    break;
+  case "Image":
+    // code block
+				$$("#ImageAttach").show();
+    break;
+  case "PDF":
+    // code block
+				$$("#PDFAttach").show();
+    break;
+    default:
+    // code block
+	} 
+	
+}
+
+function showAudio(value){
+	$$("#showAudio").attr("src",value);
+}
+function showImage(value){
+	$$("#showImage").attr("src",value);
+}
+function showVideo(value){
+	$$("#showVideo").attr("src","//www.youtube.com/embed/"+value);
+}
+function showPDF(value){
+	$$("#showPDF").attr("src",value);
+}
+// //www.youtube.com/embed/GlIzuTQGgzs
+///////////////////////////////////////////////////////////////////
 function changeTrueFalse(){
 	var trueFalse = $$('input[name=trueFalse]:checked').val();
 	console.log(trueFalse);
 }
+
+function getWeeks(_id){
+	console.log(_id);
+	
+}
+
