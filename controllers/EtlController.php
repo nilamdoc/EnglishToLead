@@ -5,6 +5,7 @@ use \lithium\template\View;
 use app\extensions\action\Functions;
 use app\extensions\action\GoogleAuthenticator;
 use app\models\Users;
+use app\models\Audios;
 
 
 class EtlController extends \lithium\action\Controller {
@@ -131,7 +132,16 @@ public function savedata(){
 	return $this->render(array('json' => array("success"=>"Yes",'user'=>$user)));		
 }
 
-
+public function saveaudio(){
+		if($this->request->data){
+			
+			Audios::create()->save($this->request->data)
+			
+			
+		}
+		return $this->render(array('json' => array("success"=>"Yes",'data'=>$this->request->data)));		
+		
+}
 
 
 
