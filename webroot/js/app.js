@@ -1,4 +1,6 @@
 var $$ = Dom7;
+var server = "https://englishtolead/";
+var storage = "ETL";
 
 var app = new Framework7({
 		root: '#app',
@@ -158,18 +160,22 @@ function  selectAttachment(value){
   case "Audio":
     // code block
 				$$("#AudioAttach").show();
+				localStorage.setItem(storage + '.attach', "Audio");
     break;
   case "Video":
     // code block
 				$$("#VideoAttach").show();
+				localStorage.setItem(storage + '.attach', "Video");
     break;
   case "Image":
     // code block
 				$$("#ImageAttach").show();
+				localStorage.setItem(storage + '.attach', "Image");
     break;
   case "PDF":
     // code block
 				$$("#PDFAttach").show();
+				localStorage.setItem(storage + '.attach', "PDF");
     break;
     default:
     // code block
@@ -197,7 +203,145 @@ function changeTrueFalse(){
 }
 
 function getWeeks(_id){
+	console.log("ID:")
 	console.log(_id);
 	
+	var submitURL = server + 'attachments/getWeeks';
+	app.preloader.show();
+ var formData = new FormData();
+	formData.append('_id', _id);
+ app.request.post(submitURL, formData, function (data) {
+  var gotData = JSON.parse(data);
+		console.log(gotData)
+		htmlnew = '<option value="">-- Select --</option>';
+  if (gotData['success'] == 'Yes') {
+			for(key in gotData['weeks']){
+				htmlnew = htmlnew + '<option value="'+gotData['weeks'][key]['_id']+'">'+gotData['weeks'][key]['week_name']+'</option>';
+			}
+   $$("#weekName").html(htmlnew);
+   app.preloader.hide();
+  } else {
+   app.preloader.hide();
+  }
+ }, function () {
+  toastTopNoInternet.open();
+  app.preloader.hide();
+ });
 }
 
+
+function getSections(_id){
+	console.log("ID:")
+	console.log(_id);
+	
+	var submitURL = server + 'attachments/getSections';
+	app.preloader.show();
+ var formData = new FormData();
+	formData.append('_id', _id);
+ app.request.post(submitURL, formData, function (data) {
+  var gotData = JSON.parse(data);
+		console.log(gotData)
+		htmlnew = '<option value="">-- Select --</option>';
+  if (gotData['success'] == 'Yes') {
+			for(key in gotData['sections']){
+				htmlnew = htmlnew + '<option value="'+gotData['sections'][key]['_id']+'">'+gotData['sections'][key]['section_name']+'</option>';
+			}
+   $$("#sectionName").html(htmlnew);
+   app.preloader.hide();
+  } else {
+   app.preloader.hide();
+  }
+ }, function () {
+  toastTopNoInternet.open();
+  app.preloader.hide();
+ });
+}
+
+function getSubjects(_id){
+	console.log("ID:")
+	console.log(_id);
+	
+	var submitURL = server + 'attachments/getSubjects';
+	app.preloader.show();
+ var formData = new FormData();
+	formData.append('_id', _id);
+ app.request.post(submitURL, formData, function (data) {
+  var gotData = JSON.parse(data);
+		console.log(gotData)
+		htmlnew = '<option value="">-- Select --</option>';
+  if (gotData['success'] == 'Yes') {
+			for(key in gotData['subjects']){
+				htmlnew = htmlnew + '<option value="'+gotData['subjects'][key]['_id']+'">'+gotData['subjects'][key]['subject_name']+'</option>';
+			}
+   $$("#subjectName").html(htmlnew);
+   app.preloader.hide();
+  } else {
+   app.preloader.hide();
+  }
+ }, function () {
+  toastTopNoInternet.open();
+  app.preloader.hide();
+ });
+}
+
+function saveAttachment(){
+	var attach = localStorage[storage + ".attach"];
+	console.log(attach);
+	
+		switch(attach) {
+  case "Audio":
+    // code block
+				var attachment = $$("#audioName").val();
+				
+    break;
+  case "Video":
+    // code block
+				var attachment = $$("#videoName").val();
+    break;
+  case "Image":
+    // code block
+				var attachment = $$("#imageName").val();
+    break;
+  case "PDF":
+    // code block
+				var attachment = $$("#pdfName").val();
+    break;
+    default:
+				var attachment = "";
+
+	} 
+	if(attachment==""){
+		app.dialog.alert("Attachment not given", "Attachment");
+		return false;
+	}
+	console.log (attachment);
+	
+	var course_id = $$('#courseName').val();
+	var week_id = $$('#weekName').val();
+	var section_id = $$('#sectionName').val();
+	var subject_id = $$('#subjectName').val();
+	
+	app.preloader.show();
+ var formData = new FormData();
+	formData.append('attach', attach);
+	formData.append('attachment', attachment);
+	formData.append('course_id', course_id);
+	formData.append('week_id', week_id);
+	formData.append('section_id', section_id);
+	formData.append('subject_id', subject_id);
+	formData.append('post', 'add');
+	var submitURL = server + 'attachments/index/json';
+ app.request.post(submitURL, formData, function (data) {
+	  app.preloader.hide();
+			app.dialog.alert("Saved", "Attachment");
+			$$("#audioName").val("");
+			$$("#videoName").val("");
+			$$("#imageName").val("");
+			$$("#pdfName").val("");
+ }, function () {
+  toastTopNoInternet.open();
+  app.preloader.hide();
+ });
+	
+	return false;
+}
