@@ -135,7 +135,7 @@ public function savedata(){
 public function saveaudio(){
 		if($this->request->data){
 			
-			Audios::create()->save($this->request->data)
+			Audios::create()->save($this->request->data);
 			
 			
 		}
