@@ -8,12 +8,14 @@ use app\extensions\action\GoogleAuthenticator;
 
 use app\models\Users;
 use app\models\Audios;
-
+use app\models\Bonuses;
 use app\models\Attachments;
 use app\models\Courses;
 use app\models\Weeks;
 use app\models\Sections;
 use app\models\Subjects;
+use app\models\Topics;
+use app\models\Questions;
 
 
 class EtlController extends \lithium\action\Controller {
@@ -192,12 +194,35 @@ public function getpath($type=null,$_id=null){
 					'conditions'=>array('_id'=>(string)$week['course_id'])
 				));
 				break;
+				
+				case 'topic':
+				$topic = Topics::find('first',array(
+					'conditions'=>array('_id'=>(string)$_id)
+				));
+				$subject = Subjects::find('first',array(
+					'conditions'=>array('_id'=>(string)$topic['subject_id'])
+				));
+				$section = Sections::find('first',array(
+					'conditions'=>array('_id'=>(string)$subject['section_id'])
+				));
+				$week = Weeks::find('first',array(
+					'conditions'=>array('_id'=>(string)$section['week_id'])
+				));
+				$course = Courses::find('first',array(
+					'conditions'=>array('_id'=>(string)$week['course_id'])
+				));
+				break;
+				
+				
 				case 'question':
 				$question = Questions::find('first',array(
 					'conditions'=>array('_id'=>(string)$_id)
 				));
+				$topic = Topics::find('first',array(
+					'conditions'=>array('_id'=>(string)$question['topic_id'])
+				));
 				$subject = Subjects::find('first',array(
-					'conditions'=>array('_id'=>(string)$question['subject_id'])
+					'conditions'=>array('_id'=>(string)$topic['subject_id'])
 				));
 				$section = Sections::find('first',array(
 					'conditions'=>array('_id'=>(string)$subject['section_id'])
@@ -229,6 +254,8 @@ public function getpath($type=null,$_id=null){
 					'section_name'=>$section['section_name']?:"",
 					'subject_id'=>$subject['_id'],
 					'subject_name'=>$subject['subject_name']?:"",
+					'topic_id'=>$topic['_id'],
+					'topic_name'=>$topic['topic_name']?:"",
 					
 			);
 
@@ -237,7 +264,57 @@ public function getpath($type=null,$_id=null){
 
 }
 
+public function getCourses(){
+	$courses = Courses::find('all',array(
+		'order'=>array('_id'=>'ASC')
+	));
+	$bonuses = Bonuses::find('all',array(
+		'order'=>array('_id'=>'ASC')
+	));	
+	$weeks = Weeks::find('all',array(
+		'order'=>array('_id'=>'ASC')
+	));
+	$sections = Sections::find('all',array(
+		'order'=>array('_id'=>'ASC')
+	));
+	$subjects = Subjects::find('all',array(
+		'order'=>array('_id'=>'ASC')
+	));
+	$topics = Topics::find('all',array(
+		'order'=>array('_id'=>'ASC')
+	));
+	$questions = Questions::find('all',array(
+		'order'=>array('_id'=>'ASC')
+	));
+	$attachments = Attachments::find('all',array(
+		'order'=>array('_id'=>'ASC')
+	));
 
+	$data = array(
+		'courses'=>count($courses),
+		'bonuses'=>count($bonuses),
+		'weeks'=>count($weeks),
+		'sections'=>count($sections),
+		'subjects'=>count($subjects),
+		'topics'=>count($topics),
+		'questions'=>count($questions),
+		'attachments'=>count($attachments),
+	);
+	
+	return $this->render(array('json' => array("success"=>"Yes",
+			'data'=>$data,
+			'courses'=>$courses,
+			'bonuses'=>$bonuses,
+			'weeks'=>$weeks,
+			'sections'=>$sections,
+			'subjects'=>$subjects,
+			'topics'=>$topics,
+			'questions'=>$questions,
+			'attachments'=>$attachments,			
+	)));		
+
+	
+}
 
 
 }
