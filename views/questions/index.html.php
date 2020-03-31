@@ -47,7 +47,7 @@
 </form>
 <hr>
 
-<h3>List of Questions for Subject: <span  class="sz2 Bebas"><?php print_r($data[0]['subject_name'])?></span></h3>
+<h3>List of Questions for Topic: <span  class="sz2 Bebas"><?php print_r($data[0]['topic_name'])?></span></h3>
 <div class="list media-list">
   <ul><hr>
 			<?php $i=1;foreach($data[1] as $d){?>

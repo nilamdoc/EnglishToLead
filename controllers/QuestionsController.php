@@ -6,6 +6,7 @@ use app\models\Courses;
 use app\models\Weeks;
 use app\models\Sections;
 use app\models\Subjects;
+use app\models\Topics;
 use app\models\Questions;
 use app\models\Questiontypes;
 
@@ -62,16 +63,16 @@ public function index($subject_id="",$format=""){
 		}
 	}
 
-		$data_subjects = Subjects::find('first',array(
-			'conditions'=>array('_id'=>(string)$subject_id)
+		$data_topics = Topics::find('first',array(
+			'conditions'=>array('_id'=>(string)$topic_id)
 		));
 		$data_questions = Questions::find('all',array(
-		'conditions'=>array('subject_id'=>(string)$subject_id),
+		'conditions'=>array('subject_id'=>(string)$topic_id),
 			'order'=>array('question_name'=>'ASC')
 		));
 		$data_questiontypes = Questiontypes::find('all');
 	$data = array();
-	array_push($data,$data_subjects,$data_questions,$data_questiontypes);
+	array_push($data,$data_topic,$data_questions,$data_questiontypes);
 
 	switch($format){
 		case 'json';

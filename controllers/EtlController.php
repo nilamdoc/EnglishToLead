@@ -4,8 +4,16 @@ use lithium\storage\Session;
 use \lithium\template\View;
 use app\extensions\action\Functions;
 use app\extensions\action\GoogleAuthenticator;
+
+
 use app\models\Users;
 use app\models\Audios;
+
+use app\models\Attachments;
+use app\models\Courses;
+use app\models\Weeks;
+use app\models\Sections;
+use app\models\Subjects;
 
 
 class EtlController extends \lithium\action\Controller {
@@ -134,15 +142,100 @@ public function savedata(){
 
 public function saveaudio(){
 		if($this->request->data){
-			
 			Audios::create()->save($this->request->data);
-			
-			
 		}
 		return $this->render(array('json' => array("success"=>"Yes",'data'=>$this->request->data)));		
 		
 }
 
+public function getpath($type=null,$_id=null){
+
+	switch($type){ 
+				case 'course':
+				$course = Courses::find('first',array(
+					'conditions'=>array('_id'=>(string)$_id)
+				));
+				break;
+				
+				case 'week':
+				$week = Weeks::find('first',array(
+					'conditions'=>array('_id'=>(string)$_id)
+				));
+				$course = Courses::find('first',array(
+					'conditions'=>array('_id'=>(string)$week['course_id'])
+				));
+				break;
+				
+				case 'section':
+				$section = Sections::find('first',array(
+					'conditions'=>array('_id'=>(string)$_id)
+				));
+				$week = Weeks::find('first',array(
+					'conditions'=>array('_id'=>(string)$section['week_id'])
+				));
+				$course = Courses::find('first',array(
+					'conditions'=>array('_id'=>(string)$week['course_id'])
+				));				
+				break;
+				
+				case 'subject':
+				$subject = Subjects::find('first',array(
+					'conditions'=>array('_id'=>(string)$_id)
+				));
+				$section = Sections::find('first',array(
+					'conditions'=>array('_id'=>(string)$subject['section_id'])
+				));
+				$week = Weeks::find('first',array(
+					'conditions'=>array('_id'=>(string)$section['week_id'])
+				));
+				$course = Courses::find('first',array(
+					'conditions'=>array('_id'=>(string)$week['course_id'])
+				));
+				break;
+				case 'question':
+				$question = Questions::find('first',array(
+					'conditions'=>array('_id'=>(string)$_id)
+				));
+				$subject = Subjects::find('first',array(
+					'conditions'=>array('_id'=>(string)$question['subject_id'])
+				));
+				$section = Sections::find('first',array(
+					'conditions'=>array('_id'=>(string)$subject['section_id'])
+				));
+				$week = Weeks::find('first',array(
+					'conditions'=>array('_id'=>(string)$section['week_id'])
+				));
+				$course = Courses::find('first',array(
+					'conditions'=>array('_id'=>(string)$week['course_id'])
+				));
+				break;
+
+	
+	
+	}
+	
+	$data = array(
+				'path'=>(string)$course['_id'].'/'.(string)$week['_id'].'/'.(string)$section['_id'].'/'.(string)$subject['_id'].'/'.(string)$question['_id'].'/',
+					'attachment_id'=>$attachment['_id'],
+					'attach_name'=>$r['attach_name'],
+					'attachment'=>$r['attachment'],
+					'question_id'=>$question['_id'],
+					'question'=>$question['question_name'],
+					'course_id'=>$course['_id'],
+					'course_name'=>$course['course_name']?:"",
+					'week_id'=>$week['_id'],
+					'week_name'=>$week['week_name']?:"",
+					'section_id'=>$section['_id'],
+					'section_name'=>$section['section_name']?:"",
+					'subject_id'=>$subject['_id'],
+					'subject_name'=>$subject['subject_name']?:"",
+					
+			);
+
+		return $this->render(array('json' => array("success"=>"Yes",'data'=>$data)));		
+
+
+}
 
 
 

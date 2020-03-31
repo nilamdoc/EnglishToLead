@@ -31,14 +31,14 @@
 	</div>
 	</form>
 	<hr>
-	<h2>List of Subjectss in <span class="Bebas"><?=$data[0]['section_name']?></span></h2>
+	<h2>List of Subjects in <span class="Bebas"><?=$data[0]['section_name']?></span></h2>
 	<div class="list simple-list">
   <ul>
 		<?php $i=1;foreach($data[1] as $d){?>
     <li><?=$i?>. <?=$d['subject_name']?> 
 					<span class="text-align-right row">
 						<input type="hidden" value="<?=$d['subject_description']?>" id="subject_description_<?=$d['_id']?>" name="subject_description_<?=$d['_id']?>" />
-						<a href="/questions/index/<?=$d['_id']?>" class="link external color-green button button-fill button-round button-small">Questions</u></a>
+						<a href="/Topics/index/<?=$d['_id']?>" class="link external color-green button button-fill button-round button-small">Topics</u></a>
 						<a href="#" class="button button-fill button-round button-small popup-open" data-popup=".popup-edit" onclick="subjectTitle('<?=$d['subject_name']?>','<?=$d['_id']?>');">Edit</a>
 						<span class="button button-fill button-round button-small color-red">
 								<?=$this->form->create('',array('url'=>'#', 'enctype'=>"multipart/form-data")); ?>

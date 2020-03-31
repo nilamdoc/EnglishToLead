@@ -142,6 +142,26 @@ function subject_description(classval){
 	$$("#subject_edit_description").val(textEditor.getValue());
 }
 
+function topicTitle(title,_id){
+	$$("#topicTitle").html(title);
+	$$("#topic_name").val(title);
+	$$("#topic_edit_id").val(_id);
+	var topic_description = $$("#topic_description_"+_id).val();
+	var textEditor = app.textEditor.get(".text-edit-topic");
+	textEditor.setValue(topic_description);
+}
+function topicDescription(classval){
+	var textEditor = app.textEditor.get(classval);
+	console.log(textEditor.getValue());
+	$$("#topic_description").val(textEditor.getValue());
+}
+function topic_description(classval){
+	var textEditor = app.textEditor.get(classval);
+	console.log(textEditor.getValue());
+	$$("#topic_edit_description").val(textEditor.getValue());
+}
+
+
 function showDivQuestion(){
 	console.log("a");
 	app.popup.close();
