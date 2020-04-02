@@ -154,13 +154,18 @@ public function getpath($type=null,$_id=null){
 public function getOutline($_id=null){
 	
 	if($_id==null){
-			$outline = Outlines::find('all',array(
+			$main = Outlines::find('first',array(
 				'conditions' => array('outline_name'=>'English To Lead')
 			));
+			$outline = Outlines::find('all',array(
+				'conditions' => array('outline_refer_id'=>(string)$main['_id']),
+				'order'=>array('left'=>'DESC')
+			));		
+			
 	}else{
 			$outline = Outlines::find('all',array(
 				'conditions' => array('outline_refer_id'=>(string)$_id),
-				'order'=>array('left'=>'ASC')
+				'order'=>array('left'=>'DESC')
 			));		
 		
 	}
