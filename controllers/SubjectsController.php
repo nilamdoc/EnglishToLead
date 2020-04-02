@@ -60,7 +60,7 @@ class SubjectsController extends \lithium\action\Controller {
 	));
 	$data_subjects = Subjects::find('all',array(
 		'conditions'=>array('section_id'=>(string)$section_id),
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('subject_name'=>'ASC')
 	));
 	$data_weeks = Weeks::find('first',array(
 		'conditions'=> array('_id'=>$data_sections['week_id'])

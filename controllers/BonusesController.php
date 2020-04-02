@@ -59,7 +59,7 @@ class BonusesController extends \lithium\action\Controller {
 	));
 	$data_bonuses = Bonuses::find('all',array(
 		'conditions'=>array('course_id'=>(string)$course_id),
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('bonus_name'=>'ASC')
 	));
 	$data = array();
 	array_push($data,$data_courses,$data_bonuses);

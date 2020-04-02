@@ -28,7 +28,7 @@ class TopicsController extends \lithium\action\Controller {
 			);
 			Topics::create()->save($data);
 			$data = Topics::find('all',array(
-				'order'=>array('_id'=>'ASC')
+				'order'=>array('topic_name'=>'ASC')
 			));
 			break;
 			
@@ -51,7 +51,7 @@ class TopicsController extends \lithium\action\Controller {
 			break;
 			default:
 			$data = Topics::find('all',array(
-				'order'=>array('_id'=>'ASC')
+				'order'=>array('topic_name'=>'ASC')
 			));
 		}
 	}
@@ -62,7 +62,7 @@ class TopicsController extends \lithium\action\Controller {
 	
 	$data_topics = Topics::find('all',array(
 		'conditions'=>array('subject_id'=>(string)$subject_id),
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('topic'=>'ASC')
 	));
 	
 	$data_sections = Sections::find('first',array(

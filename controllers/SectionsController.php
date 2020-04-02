@@ -60,7 +60,7 @@ class SectionsController extends \lithium\action\Controller {
 	));
 	$data_sections = Sections::find('all',array(
 		'conditions'=>array('week_id'=>(string)$week_id),
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('section_name'=>'ASC')
 	));
 	$data_courses = Courses::find('first',array(
 		'conditions' => array('_id'=>$data_weeks['course_id'])
