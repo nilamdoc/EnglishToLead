@@ -1,7 +1,7 @@
 var $$ = Dom7;
 var server = "https://englishtolead/";
 var storage = "ETL";
-
+ 
 var app = new Framework7({
 		root: '#app',
   smartSelect: {
