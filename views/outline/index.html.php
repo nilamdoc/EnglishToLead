@@ -72,7 +72,7 @@
 				<a href="/outline/index/<?=$d['_id']?>" class="link external">
 				<?php foreach($d['ancestors_names'] as $da){
 						echo $da . " - ";
-				} ?> <?=$d['outline_name']?></a>
+				} ?> <?=$d['outline_name']?></a> T D
 				</div>
 				<div class="item-after">
 				<a href="/outline/delete/<?=$d['_id']?>" class="link external">

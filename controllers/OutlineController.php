@@ -56,7 +56,7 @@ class OutlineController extends \lithium\action\Controller {
 		
 		$data = Outlines::find('all',array(
 				'fields'=>array('outline_name','_id','ancestors_names'),
-				'order'=>array('left'=>'DESC')
+				'order'=>array('left'=>'ASC')
 		));
 		
 		return compact('data','outline');
