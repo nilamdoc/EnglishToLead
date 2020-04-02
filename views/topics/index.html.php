@@ -17,7 +17,7 @@
       </div>
     </li>
 				<li><span class="block"><small>Description</small></span>
-				<div class="text-editor text-add-topic text-editor-init" data-placeholder="Enter text..." data-buttons='[["bold", "italic", "underline", "strikeThrough"],["h1","h2","h3"],["alignLeft","alignRight","alignCenter","alignJustify"], ["subscript", "superscript"],
+				<div class="text-editor text-editor-resizable text-add-topic text-editor-init" data-placeholder="Enter text..." data-buttons='[["bold", "italic", "underline", "strikeThrough"],["h1","h2","h3"],["alignLeft","alignRight","alignCenter","alignJustify"], ["subscript", "superscript"],
   ["indent", "outdent"], ["orderedList", "unorderedList"]]'>
 						<div class="text-editor-content" contenteditable>
 						</div>
@@ -56,7 +56,7 @@
 	</div>
 
 		<div class="popup popup-edit">
-    <div class="block">
+    <div class="block page-content">
       <p class="Bebas sz1">Edit
 						<span class="text-align-right"><a class="link popup-close " href="#"><i class="icon f7-icons color-red">xmark_square_fill</i></a></span>
 						</p>
@@ -78,7 +78,7 @@
 											</div>
 									</li>
 									<li>
-											<div class="text-editor text-edit-topic text-editor-init" data-placeholder="Enter text..." data-buttons='[["bold", "italic", "underline", "strikeThrough"],["h1","h2","h3"],["alignLeft","alignRight","alignCenter","alignJustify"], ["subscript", "superscript"],
+											<div class="text-editor text-editor-resizable text-edit-topic text-editor-init" data-placeholder="Enter text..." data-buttons='[["bold", "italic", "underline", "strikeThrough"],["h1","h2","h3"],["alignLeft","alignRight","alignCenter","alignJustify"], ["subscript", "superscript"],
   ["indent", "outdent"], ["orderedList", "unorderedList"]]'>
 												<div class="text-editor-content" contenteditable></div>
 											</div>
