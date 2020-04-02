@@ -31,9 +31,7 @@
 					<?php }?>
 				</div>
 				<div class="page-content block">
-					<hr>
 					<?php echo $this->content(); ?>
-					
 					<hr>
 					<div class="footer Rale">
 						<p>&copy; EnglishToLead <?php echo date('Y') ?></p>
@@ -46,3 +44,7 @@
 	<script src="/js/app.js"></script>
 </body>
 </html>
+
+<script>
+outlineTitle();
+</script>

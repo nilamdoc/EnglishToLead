@@ -13,10 +13,9 @@ class OutlineController extends \lithium\action\Controller {
 		$this->set(array('title'=>'Outlines'));
  }
 
-	public function index(){
+	public function index($_id=null){
 		if($this->request->data){		
 			$post = $this->request->data['post'];
-			
 			
 			switch($post){
 				case 'add':
@@ -29,29 +28,46 @@ class OutlineController extends \lithium\action\Controller {
 									'outline_refer_id' => $this->request->data['outline_refer'],
         );				
 								
-				$conditions = array("mobile"=>(string)$this->request->data['mobile']);
-								
-				if($this->addOutline($data)==true){
-					
-				}
+				$this->addOutline($data);
 				break;
 				
 				case 'edit':
+					$data = array(
+									'outline_name' => $this->request->data['outline_name'],
+									'outline_text' => $this->request->data['outline_text'],
+									'outline_description' => $this->request->data['outline_description'],
+									'outline_order' => $this->request->data['outline_order'],
+									'DateTime' => new \MongoDate(),
+									'outline_refer_id' => $this->request->data['outline_refer'],
+        );		
+								
+				$conditions = array('_id'=>(string)$this->request->data['_id']);
+				Outlines::update($data,$conditions);
+				return $this->redirect('/outline');
 				break;
 				
-				case 'delete':
-				break;
-
 			}
 		
 		}
+		
+		$outline = Outlines::find('first',array(
+			'conditions'=>array('_id'=>(string)$_id)
+		));
 		
 		$data = Outlines::find('all',array(
 				'fields'=>array('outline_name','_id','ancestors_names'),
 				'order'=>array('_id'=>'ASC')
 		));
 		
-		return compact('data');
+		return compact('data','outline');
+		
+	}
+	
+	public function delete($_id=null){
+		$conditions = array('_id'=>(string)$_id);
+		Outlines::remove($conditions);
+		
+		return $this->redirect('/outline');
 		
 	}
 

@@ -144,12 +144,16 @@ function subject_description(classval){
 
 function outlineDescription(classval){
 	var textEditor = app.textEditor.get(classval);
+	console.log(textEditor.getValue());
 	$$("#outline_description").val(textEditor.getValue());
 }
 
-
-
-
+function outlineTitle(){
+var outline_description = $$("#outline_description").val();
+console.log(outline_description);
+var textEditor = app.textEditor.get(".text-add-outline");
+textEditor.setValue(outline_description);
+}
 
 
 
