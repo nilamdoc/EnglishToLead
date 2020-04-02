@@ -266,22 +266,22 @@ public function getpath($type=null,$_id=null){
 
 public function getCourses(){
 	$courses = Courses::find('all',array(
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('course_name'=>'ASC')
 	));
 	$bonuses = Bonuses::find('all',array(
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('bonus_name'=>'ASC')
 	));	
 	$weeks = Weeks::find('all',array(
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('week_name'=>'ASC')
 	));
 	$sections = Sections::find('all',array(
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('section_name'=>'ASC')
 	));
 	$subjects = Subjects::find('all',array(
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('subject_name'=>'ASC')
 	));
 	$topics = Topics::find('all',array(
-		'order'=>array('_id'=>'ASC')
+		'order'=>array('topic_name'=>'ASC')
 	));
 	$questions = Questions::find('all',array(
 		'order'=>array('_id'=>'ASC')
