@@ -142,6 +142,20 @@ function subject_description(classval){
 	$$("#subject_edit_description").val(textEditor.getValue());
 }
 
+function outlineDescription(classval){
+	var textEditor = app.textEditor.get(classval);
+	$$("#outline_description").val(textEditor.getValue());
+}
+
+
+
+
+
+
+
+
+
+
 function topicTitle(title,_id){
 	$$("#topicTitle").html(title);
 	$$("#topic_name").val(title);
