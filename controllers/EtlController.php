@@ -163,14 +163,27 @@ public function getOutline($_id=null){
 				'order'=>array('left'=>'DESC')
 			));		
 			
+			
 	}else{
 			$outline = Outlines::find('all',array(
 				'conditions' => array('outline_refer_id'=>(string)$_id),
 				'order'=>array('left'=>'DESC')
 			));
 			$downLevels = $this->downlLevels($_id);
+			
 	}
-	return $this->render(array('json' => array("success"=>"Yes",'outline'=>$outline, 'down'=>$downLevels,'main'=>$main)));		
+		$allnext = array();
+			
+			foreach($outline as $o){
+//				print_r($o['_id']."**".$o['outline_name']."--".$o['outline_refer_id']."@@@@@@@@@@@@@@@\n");
+				$depth = Outlines::find('first',array(
+					'conditions'=>array('outline_refer_id'=>(string)$o['_id']),
+				));
+				array_push($allnext,$depth);
+			}
+
+	
+	return $this->render(array('json' => array("success"=>"Yes",'outline'=>$outline, 'down'=>$downLevels,'main'=>$main,'allnext'=>$allnext)));		
 }
 
 function downlLevels($_id){

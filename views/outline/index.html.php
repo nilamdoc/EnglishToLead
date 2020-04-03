@@ -45,9 +45,9 @@
 					</li>
 					<h3>Under</h3>
 					<li>
-						<select name="outline_refer" id="outline_refer" <?php if(count($outline)>0){?> disabled <?php }?>>
+						<select name="outline_refer" id="outline_refer">
 							<?php foreach($data as $d){?>
-									<option value="<?=$d['_id']?>" <?php if($d['_id']==$outline['outline_refer_id']){echo " selected ";}?>><?php foreach($d['ancestors_names'] as $da){
+									<option value="<?=$d['_id']?>" <?php if($d['_id']==$outline['outline_refer_id']){echo " selected ";}else{echo " disabled ";}?>><?php foreach($d['ancestors_names'] as $da){
 											echo $da . " - ";
 									} ?> <?=$d['outline_name']?></option>
 							<?php }?>

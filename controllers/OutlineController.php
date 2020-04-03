@@ -118,8 +118,6 @@ function AddOutline($data){
 					);
 					
 					
-					
-					
 					$newData = array(
 									'outline_name' => $data['outline_name'],
 									'outline_text' => $data['outline_text'],
