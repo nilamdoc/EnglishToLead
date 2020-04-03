@@ -68,11 +68,12 @@
   <ul class="no-pasdding no-margin">
 			<?php foreach($data as $d){?>
 				<li  class="no-pasdding no-margin">
-				<div class="item-title">
+				<div class="item-title"> <?php echo count($d['ancestors_names']);?>
 				<a href="/outline/index/<?=$d['_id']?>" class="link external">
+				
 				<?php foreach($d['ancestors_names'] as $da){
 						echo $da . " &rarr; ";
-				} ?> <?=$d['outline_name']?></a> 
+				} ?>&nbsp;<strong><?=$d['outline_name']?></strong></a> 
 				
 			<?php if($d['outline_text']!=""){?>&trade;<?php }?>
 			<?php if($d['outline_description']!=""){?>&hellip;<?php }?>
