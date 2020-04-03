@@ -179,7 +179,7 @@ function downlLevels($_id){
 		));
 			$left = $current['left'];
 			$right = $current['right'];
-			$down = Outlines::count('all',array('conditions'=>
+			$down = Outlines::find('all',array('conditions'=>
 			array(
 						'left'=>array('$gt'=>$left),
 						'right'=>array('$lt'=>$right),
