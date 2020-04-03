@@ -170,7 +170,7 @@ public function getOutline($_id=null){
 			));
 			$downLevels = $this->downlLevels($_id);
 	}
-	return $this->render(array('json' => array("success"=>"Yes",'outline'=>$outline, 'down'=>$downLevels,'main'=$main)));		
+	return $this->render(array('json' => array("success"=>"Yes",'outline'=>$outline, 'down'=>$downLevels,'main'=>$main)));		
 }
 
 function downlLevels($_id){
