@@ -5,6 +5,13 @@ use \lithium\template\View;
 use app\extensions\action\Functions;
 use app\extensions\action\GoogleAuthenticator;
 
+use Google\Cloud\TextToSpeech\V1\AudioConfig;
+use Google\Cloud\TextToSpeech\V1\AudioEncoding;
+use Google\Cloud\TextToSpeech\V1\SsmlVoiceGender;
+use Google\Cloud\TextToSpeech\V1\SynthesisInput;
+use Google\Cloud\TextToSpeech\V1\TextToSpeechClient;
+use Google\Cloud\TextToSpeech\V1\VoiceSelectionParams;
+use Google\Cloud\Storage\StorageClient;
 
 use app\models\Users;
 use app\models\Audios;
@@ -201,4 +208,74 @@ function downlLevels($_id){
 }
 
 
+function audio(){
+
+// instantiates a client
+$client = new TextToSpeechClient();
+
+// sets text to be synthesised
+$synthesisInputText = (new SynthesisInput())
+    ->setText('Hello, world!');
+
+// build the voice request, select the language code ("en-US") and the ssml
+// voice gender
+$voice = (new VoiceSelectionParams())
+    ->setLanguageCode('en-US')
+    ->setSsmlGender(SsmlVoiceGender::FEMALE);
+
+// Effects profile
+$effectsProfileId = "telephony-class-application";
+
+// select the type of audio file you want returned
+$audioConfig = (new AudioConfig())
+    ->setAudioEncoding(AudioEncoding::MP3)
+    ->setEffectsProfileId(array($effectsProfileId));
+
+// perform text-to-speech request on the text input with selected voice
+// parameters and audio file type
+$response = $client->synthesizeSpeech($synthesisInputText, $voice, $audioConfig);
+$audioContent = $response->getAudioContent();
+
+// the response's audioContent is binary
+file_put_contents('output.mp3', $audioContent);
+echo	'Audio content written to "output.mp3"' . PHP_EOL;
+	
+	return $this->render(array('json' => array("success"=>"Yes")));		
+	
 }
+
+
+//
+
+function auth_cloud_implicit($projectId)
+{
+	
+		$v = new ImageAnnotatorClient([
+    'credentials' => 'F:/Google-Cloud-API/Audio for ETL-ec977ca75aa3.json'
+		]);
+    $config = [
+        'projectId' => $projectId,
+								'key'=>GOOGLE_API_KEY
+    ];
+
+    # If you don't specify credentials when constructing the client, the
+    # client library will look for credentials in the environment.
+    $storage = new StorageClient($config);
+
+    # Make an authenticated API request (listing storage buckets)
+    foreach ($storage->buckets() as $bucket) {
+        printf('Bucket: %s' . PHP_EOL, $bucket->name());
+    }
+}
+
+
+}
+
+
+
+
+
+
+
+ 
+

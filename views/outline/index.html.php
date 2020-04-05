@@ -42,7 +42,7 @@
 					<div class="text-editor text-add-outline text-editor-init text-editor-resizable" data-placeholder="Enter text..." data-buttons='[["bold", "italic", "underline", "strikeThrough"], ["h1","h2","h3"], ["alignLeft","alignRight","alignCenter","alignJustify"], ["subscript", "superscript"], ["indent", "outdent"], ["orderedList", "unorderedList"]]'>
 							<div class="text-editor-content" contenteditable></div>
 					</div>
-					</li>
+					</li><hr>
 					<h3>Under</h3>
 					<li>
 						<select name="outline_refer" id="outline_refer">
@@ -53,14 +53,60 @@
 									} ?> <?=$d['outline_name']?></option>
 							<?php }?>
 						</select>
-					</li>
-					</ul>
+					</li><hr>
 					
 					<div class="row">
 						<div class="col"></div>
 											<div class="col"><input type="submit" value="Save" class=" button button-outline button-round button-raised" onclick="return outlineDescription('.text-add-outline');"></div>
 						<div class="col"></div>
 					</div>
+					<li class="item-content item-input">
+							<div class="item-inner Rale ">
+									<div class="item-title item-label sz1">Video</div>
+									<div class="item-input-wrap sz1">
+											<input type="text" placeholder="A_JDI123OpLKD" id="outline_video" name="outline_video" value="<?=$outline['outline_video']?>">
+											<span class="input-clear-button"></span>
+									</div>
+							</div>
+					</li>
+					<li class="item-content item-input">
+							<div class="item-inner Rale ">
+									<div class="item-title item-label sz1">Image</div>
+									<div class="item-input-wrap sz1">
+											<input type="text" placeholder="Full CDN Path" id="outline_audio" name="outline_image" value="<?=$outline['outline_image']?>">
+											<span class="input-clear-button"></span>
+									</div>
+							</div>
+					</li>
+					<li class="item-content item-input">
+							<div class="item-inner Rale ">
+									<div class="item-title item-label sz1">Audio</div>
+									<div class="item-input-wrap sz1">
+											<input type="text" placeholder="Full CDN Path" id="outline_audio" name="outline_audio" value="<?=$outline['outline_audio']?>">
+											<span class="input-clear-button"></span>
+									</div>
+							</div>
+					</li>
+					<li class="item-content item-input">
+							<div class="item-inner Rale ">
+									<div class="item-title item-label sz1">PDF</div>
+									<div class="item-input-wrap sz1">
+											<input type="text" placeholder="Full CDN Path" id="outline_pdf" name="outline_pdf" value="<?=$outline['outline_pdf']?>">
+											<span class="input-clear-button"></span>
+									</div>
+							</div>
+					</li>					
+					<li class="item-content item-input">
+							<div class="item-inner Rale ">
+									<div class="item-title item-label sz1">URL</div>
+									<div class="item-input-wrap sz1">
+											<input type="text" placeholder="Full CDN Path" id="outline_url" name="outline_url" value="<?=$outline['outline_url']?>">
+											<span class="input-clear-button"></span>
+									</div>
+							</div>
+					</li>					
+					</ul>
+					
 		</div>
 	</form>
 	</div>
@@ -76,8 +122,8 @@
 						echo $da . " &rarr; ";
 				} ?>&nbsp;<strong><?=$d['outline_name']?></strong></a> 
 				
-			<?php if($d['outline_text']!=""){?>&trade;<?php }?>
-			<?php if($d['outline_description']!=""){?>&hellip;<?php }?>
+			<?php if($d['outline_text']!=""){?><sup>Title</sup><?php }?>
+			<?php if($d['outline_description']!=""){?><sup>Desc</sup><?php }?>
 				</div>
 				<!--<div class="item-after">
 				<a href="/outline/delete/<?=$d['_id']?>" class="link external">

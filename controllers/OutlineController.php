@@ -24,6 +24,11 @@ class OutlineController extends \lithium\action\Controller {
 									'outline_text' => $this->request->data['outline_text'],
 									'outline_description' => $this->request->data['outline_description'],
 									'outline_order' => $this->request->data['outline_order'],
+									'outline_video' => $this->request->data['outline_video'],
+									'outline_audio' => $this->request->data['outline_audio'],									
+									'outline_image' => $this->request->data['outline_image'],									
+									'outline_pdf' => $this->request->data['outline_pdf'],									
+									'outline_url' => $this->request->data['outline_url'],
 									'DateTime' => new \MongoDate(),
 									'outline_refer_id' => $this->request->data['outline_refer'],
         );				
@@ -37,6 +42,11 @@ class OutlineController extends \lithium\action\Controller {
 									'outline_text' => $this->request->data['outline_text'],
 									'outline_description' => $this->request->data['outline_description'],
 									'outline_order' => $this->request->data['outline_order'],
+									'outline_video' => $this->request->data['outline_video'],
+									'outline_audio' => $this->request->data['outline_audio'],									
+									'outline_image' => $this->request->data['outline_image'],									
+									'outline_pdf' => $this->request->data['outline_pdf'],									
+									'outline_url' => $this->request->data['outline_url'],
 									'DateTime' => new \MongoDate(),
 									'outline_refer_id' => $this->request->data['outline_refer'],
         );		

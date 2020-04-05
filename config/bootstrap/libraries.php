@@ -135,6 +135,7 @@ Libraries::add('app', ['default' => true]);
  * `autoload.php` file will be available once `composer install` was run.
  */
 if (file_exists($file = LITHIUM_LIBRARY_PATH . '/autoload.php')) {
+	
 	require $file;
 }
 
