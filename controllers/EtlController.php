@@ -159,7 +159,6 @@ public function getpath($type=null,$_id=null){
 }
 
 public function getOutline($_id=null){
-	
 	if($_id==null){
 			$main = Outlines::find('first',array(
 				'conditions' => array('outline_name'=>'English To Lead')
@@ -169,8 +168,7 @@ public function getOutline($_id=null){
 				'conditions' => array('outline_refer_id'=>(string)$main['_id']),
 				'order'=>array('left'=>'DESC')
 			));		
-			
-			
+
 	}else{
 			$outline = Outlines::find('all',array(
 				'conditions' => array('outline_refer_id'=>(string)$_id),
@@ -190,7 +188,7 @@ public function getOutline($_id=null){
 			}
 
 	
-	return $this->render(array('json' => array("success"=>"Yes",'outline'=>$outline, 'down'=>$downLevels,'main'=>$main,'allnext'=>$allnext)));		
+	return $this->render(array('json' => array("success"=>"Yes",'outline'=>$outline, 'down'=>$downLevels, 'countDown'=> count($downLevels), 'main'=>$main,'allnext'=>$allnext)));		
 }
 
 function downlLevels($_id){
@@ -291,16 +289,12 @@ function auth_cloud_implicit($projectId)
 
 
 function directory(){
-	
 	$outlines = Outlines::find('all');
-	
-	
 	foreach ($outlines as $o){
 		$hash = sha1($o['_id']);
 		$directory = substr($hash,0,1)."\\".substr($hash,1,1)."\\".substr($hash,2,1)."\\".substr($hash,3,1);
 		echo exec("mkdir ".LITHIUM_APP_PATH.'\\webroot\\documents\\'.$directory);
 	}
-	
 	
 	return $this->render(array('json' => array("success"=>"Yes",'hash'=>LITHIUM_APP_PATH.'\\webroot\\documents\\'.$directory)));		
 }
