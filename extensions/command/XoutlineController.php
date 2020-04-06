@@ -11,7 +11,17 @@ public function run() {
 	
 	foreach($outline as $o){
 		$hash = sha1($o['_id']);
+		
 		$directory = substr($hash,0,1)."\\".substr($hash,1,1)."\\".substr($hash,2,1)."\\".substr($hash,3,1);
+		$directory_os = substr($hash,0,1)."/".substr($hash,1,1)."/".substr($hash,2,1)."/".substr($hash,3,1);
+		$outfile = "https://englishtolead.com/documents/".$directory_os."/".$hash.".mp3";
+		
+		$data = array(
+				"outline_audio"=>$outfile
+		);
+		$conditions = array('_id'=>(string)$o['_id']);
+
+		Outlines::update($data,$conditions);
 		
 		if($o['outline_description']!=""){
 			echo exec("mkdir ".LITHIUM_APP_PATH.'\\webroot\\documents\\'.$directory);
