@@ -104,7 +104,20 @@
 											<span class="input-clear-button"></span>
 									</div>
 							</div>
-					</li>					
+					</li>	<hr>
+					<?php if(count($outline)>0){?>
+					<h3>Upload</h3>
+					 <form action="/outline/upload/" enctype="multipart/form-data" method="post">
+        <label for="fileSelect">Filename:</label>
+        <input type="file" name="file_name" id="fileSelect">
+        <input type="submit" name="submit" value="Upload">
+        <p><strong>Note:</strong> Only .jpg, .jpeg, .gif, .png formats allowed to a max size of 5 MB.</p>
+						</form>
+					
+					<?php }?>
+					
+					
+					
 					</ul>
 					
 		</div>
@@ -130,7 +143,6 @@
 				<i class="icon f7-icons color-red">xmark</i>
 				</a>
 				</div> -->
-				
 				</li>
 			<?php }?>
   </ul>

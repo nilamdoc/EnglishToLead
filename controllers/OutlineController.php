@@ -155,6 +155,11 @@ function AddOutline($data){
 	}	
 }
 
+public function upload(){
+	
+	print_r($this->request->data);exit;
+}
+
 
 }
 ?>

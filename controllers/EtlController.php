@@ -201,11 +201,32 @@ function downlLevels($_id){
 			$right = $current['right'];
 			$down = Outlines::find('all',array('conditions'=>
 			array(
-						'left'=>array('$gt'=>$left),
-						'right'=>array('$lt'=>$right),
+				'outline_refer_id'=>(string)$_id
 					)));
 		return $down;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function audio(){
@@ -269,13 +290,20 @@ function auth_cloud_implicit($projectId)
 }
 
 
+function directory(){
+	
+	$outlines = Outlines::find('all');
+	
+	
+	foreach ($outlines as $o){
+		$hash = sha1($o['_id']);
+		$directory = substr($hash,0,1)."\\".substr($hash,1,1)."\\".substr($hash,2,1)."\\".substr($hash,3,1);
+		echo exec("mkdir ".LITHIUM_APP_PATH.'\\webroot\\documents\\'.$directory);
+	}
+	
+	
+	return $this->render(array('json' => array("success"=>"Yes",'hash'=>LITHIUM_APP_PATH.'\\webroot\\documents\\'.$directory)));		
 }
 
 
-
-
-
-
-
- 
-
+}
