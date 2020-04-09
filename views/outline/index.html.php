@@ -138,11 +138,11 @@
 			<?php if($d['outline_text']!=""){?><sup>Title</sup><?php }?>
 			<?php if($d['outline_description']!=""){?><sup>Desc</sup><?php }?>
 				</div>
-				<!--<div class="item-after">
+				<div class="item-after">
 				<a href="/outline/delete/<?=$d['_id']?>" class="link external">
 				<i class="icon f7-icons color-red">xmark</i>
 				</a>
-				</div> -->
+				</div>
 				</li>
 			<?php }?>
   </ul>
