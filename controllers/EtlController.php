@@ -180,7 +180,7 @@ public function getOutline($_id=null){
 		$allnext = array();
 			
 			foreach($outline as $o){
-				print_r($o['_id']."**".$o['outline_name']."--".$o['_id']."@@@@@@@@@@@@@@@\n");
+//				print_r($o['_id']."**".$o['outline_name']."--".$o['_id']."@@@@@@@@@@@@@@@\n");
 				$depth = Outlines::find('first',array(
 					'conditions'=>array('outline_refer_id'=>(string)$o['_id']),
 				));
